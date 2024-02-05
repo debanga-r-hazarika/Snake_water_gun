@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        #game-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .option {
+            padding: 20px;
+            border: 2px solid #333;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #ddd;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <title>Snake, Water, Gun Game</title>
+</head>
+<body>
+
+    <h1>Snake, Water, Gun Game</h1>
+
+    <div id="game-container">
+        <div class="option" onclick="playGame('snake')">Snake</div>
+        <div class="option" onclick="playGame('water')">Water</div>
+        <div class="option" onclick="playGame('gun')">Gun</div>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        function playGame(userChoice) {
+            const choices = ['snake', 'water', 'gun'];
+            const randomIndex = Math.floor(Math.random() * 3);
+            const computerChoice = choices[randomIndex];
+
+            const result = compareChoices(userChoice, computerChoice);
+
+            displayResult(userChoice, computerChoice, result);
+        }
+
+        function compareChoices(user, computer) {
+            if (user === computer) {
+                return 'It\'s a tie!';
+            } else if (
+                (user === 'snake' && computer === 'water') ||
+                (user === 'water' && computer === 'gun') ||
+                (user === 'gun' && computer === 'snake')
+            ) {
+                return 'You win!';
+            } else {
+                return 'You lose!';
+            }
+        }
+
+        function displayResult(user, computer, result) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `Your choice: ${user}<br>Computer's choice: ${computer}<br>Result: ${result}`;
+        }
+    </script>
+
+</body>
+</html>
